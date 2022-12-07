@@ -6,11 +6,18 @@ public class Grocery {
     private double tomatoPrice;
     private List<String> shoppingCart = new ArrayList<>();
     private List<Integer> numOfItems = new ArrayList<>();
-
+    private String name;
     public Grocery(){
         applePrice = 0.99;
         avoPrice = 1.10;
         tomatoPrice = 0.5;
+        name = "";
+    }
+    public Grocery(String name){
+        this.name = name;
+    }
+    public String toString(){
+        return "Hello, " + name + "!";
     }
     public void groceryIntro(){
         Scanner scan = new Scanner(System.in);
@@ -19,10 +26,10 @@ public class Grocery {
         System.out.println("Do you want to see what we have here? (y/n)");
         String userInput = scan.nextLine();
         if(userInput.equals("y")){
-            System.out.println("We have apples (0.99 cents ea), avocados (1.00 ea), and tomatoes (0.50 ea)");
+            System.out.println("We have apples (0.99 cents ea), avocados (1.10 ea), and tomatoes (0.50 ea)");
         }else if(userInput.equals("n")){
             System.out.println("You're an L. I'm going to show it anyway.");
-            System.out.println("We have apples (0.99 cents ea), avocados (1.00 ea), and tomatoes (0.50 ea)");
+            System.out.println("We have apples (0.99 cents ea), avocados (1.10 ea), and tomatoes (0.50 ea)");
         }else{
             System.out.println("What you inputted isn't y or n. Rerun the program and answer correctly.");
             System.exit(0);
@@ -81,15 +88,15 @@ public class Grocery {
     public double Calculate(){
         //calculates the user's total price
         if((shoppingCart.get(0)).equals("apples")){
-            return applePrice * numOfItems.get(0);
+            return (double)Math.round(applePrice * numOfItems.get(0) * 100)/100;
         }else if((shoppingCart.get(0)).equals("avocados")){
-            return avoPrice * numOfItems.get(0);
+            return (double)Math.round(avoPrice * numOfItems.get(0) * 100)/100;
         }else{
-            return tomatoPrice * numOfItems.get(0);
+            return (double)Math.round(tomatoPrice * numOfItems.get(0) * 100)/100;
         }
     }
-    public String toString(){
-        return "Your total is: $" + Calculate() + "\n" + "There's a special event today!";
+    public void totalToString(){
+        System.out.println("Your total is: $" + Calculate() + "\n" + "There's a special event today!");
     }
     public void specialEvent(){
         //uses Math.random() for a chance to get free groceries
@@ -99,7 +106,7 @@ public class Grocery {
         int usersChoice = scan.nextInt();
         System.out.println("My choice was " + alexasChoice);
         if(usersChoice == alexasChoice){
-            System.out.println("Congrats! You got your groceries for free!");
+            System.out.println("Congrats! You get your groceries for free!");
         }else{
             System.out.println("HA! You didn't get your groceries for free!");
         }
